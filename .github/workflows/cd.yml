@@ -22,7 +22,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Upload files to S3
         run: |
-          zip -r ${{ env.APP_VERSION_LABEL }}.zip * .dockerignore
+          zip -r ${{ env.APP_VERSION_LABEL }}.zip *
           aws s3 cp ${{ env.APP_VERSION_LABEL }}.zip s3://${{ secrets.AWS_DEPLOY_S3_BUCKET }}/${{ env.APP_VERSION_LABEL }}.zip
       - name: Create EB App APP_VERSION_LABEL
         run: aws elasticbeanstalk create-application-version --application-name ${{ secrets.AWS_EB_APP_NAME }} --version-label ${{ env.APP_VERSION_LABEL }} --source-bundle S3Bucket=${{ secrets.AWS_DEPLOY_S3_BUCKET }},S3Key=${{ env.APP_VERSION_LABEL }}.zip --no-auto-create-application
