@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  APP_VERSION_LABEL: jaime-salas-bb-review-$GITHUB_RUN_ID-$GITHUB_SHA
+  APP_VERSION_LABEL: jaime-salas-bb-review-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_SHA }}
 
 jobs:
   cd:
