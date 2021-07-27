@@ -22,10 +22,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Print environment variables 
         run: echo ${APP_VERSION_LABEL}
-      - name: Simple inspect
-        run: ls -la
       - name: Simple zip 
         run: zip -r ${APP_VERSION_LABEL}.zip * .dockerignore
+      - name: Simple inspect
+        run: ls -la
       # - name: Upload files to S3
       #   run: |
       #     zip -r ${{ env.APP_VERSION_LABEL }}.zip * .dockerignore
