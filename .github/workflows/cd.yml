@@ -32,6 +32,8 @@ jobs:
         run: echo "${{ env.APP_VERSION_LABEL }}" 
       - name: Upload files to S3
         run: zip -r "${{ env.APP_VERSION_LABEL }}".zip * .dockerignore
+      - name: inspect directory
+        run: ls -la
       # - name: Upload files to S3
       #   run: |
       #     zip -r "${{ env.APP_VERSION_LABEL }}".zip * .dockerignore
