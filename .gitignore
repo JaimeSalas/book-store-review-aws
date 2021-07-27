@@ -1,0 +1,10 @@
+# local artifact
+aws-beanstalk
+aws-beanstalk.zip
+
+# helper scripts
+*.sh
+
+# heper notes
+notes.md
+
