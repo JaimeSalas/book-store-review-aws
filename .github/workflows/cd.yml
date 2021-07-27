@@ -6,7 +6,8 @@ on:
       - master
 
 env:
-  APP_VERSION_LABEL: jaime-salas-bb-review-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_SHA }}
+  # APP_VERSION_LABEL: jaime-salas-bb-review-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_SHA }}
+  APP_VERSION_LABEL: jaime-salas-bb-review
 
 jobs:
   cd:
@@ -21,7 +22,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Print environment variables 
-        run: printenv
+        run: echo ${{ env.APP_VERSION_LABEL }}
       # - name: Simple zip 
       #   run: zip -r ${APP_VERSION_LABEL}.zip * .dockerignore
       # - name: Simple inspect
