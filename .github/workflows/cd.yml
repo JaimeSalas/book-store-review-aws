@@ -7,8 +7,8 @@ on:
 
 env:
   # APP_VERSION_LABEL: jaime-salas-bb-review-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_SHA }}
-  APP_VERSION_LABEL: jaime-salas-bb-review
-
+  # APP_VERSION_LABEL: jaime-salas-bb-review
+  AWS_EB_APP_NAME: jaime-salas-bb-review
 jobs:
   cd:
     runs-on: ubuntu-latest
@@ -21,11 +21,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_DEPLOY_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Print environment variables 
-        run: |
-          echo ${{ env.APP_VERSION_LABEL }}
-          echo $GITHUB_RUN_ID
-          echo $GITHUB_SHA
+      # - name: Print environment variables 
+      #   run: |
+      #     echo ${{ env.APP_VERSION_LABEL }}
+      #     echo $GITHUB_RUN_ID
+      #     echo $GITHUB_SHA
+      - name: Setup env variables
+        run: echo {{ env.AWS_EB_APP_NAME }}-$GITHUB_RUN_ID-$GITHUB_SHA 
       # - name: Simple zip 
       #   run: zip -r ${APP_VERSION_LABEL}.zip * .dockerignore
       # - name: Simple inspect
