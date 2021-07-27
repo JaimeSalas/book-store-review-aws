@@ -25,7 +25,7 @@ jobs:
       - name: Simple inspect
         run: ls -la
       - name: Simple zip 
-        run: zip -r my.zip * .dockerignore
+        run: zip -r ${APP_VERSION_LABEL}.zip * .dockerignore
       # - name: Upload files to S3
       #   run: |
       #     zip -r ${{ env.APP_VERSION_LABEL }}.zip * .dockerignore
