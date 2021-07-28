@@ -5,12 +5,13 @@ on:
     branches:
       - master
 
+env:
+  # APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-$GITHUB_RUN_ID-$GITHUB_SHA
+  APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-${GITHUB_RUN_ID}-${GITHUB_SHA}
+
 jobs:
   cd:
     runs-on: ubuntu-latest
-    env:
-      # APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-$GITHUB_RUN_ID-$GITHUB_SHA
-      APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-${GITHUB_RUN_ID}-${GITHUB_SHA}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
