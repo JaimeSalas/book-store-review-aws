@@ -9,7 +9,8 @@ jobs:
   cd:
     runs-on: ubuntu-latest
     env:
-      APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-$GITHUB_RUN_ID-$GITHUB_SHA
+      # APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-$GITHUB_RUN_ID-$GITHUB_SHA
+      APP_VERSION_LABEL: ${{ secrets.AWS_EB_APP_NAME }}-${GITHUB_RUN_ID}-${GITHUB_SHA}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -21,9 +22,9 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Upload files to S3
         run: |
-          zip -r "${{ env.APP_VERSION_LABEL }}".zip * .dockerignore
-          aws s3 cp "${{ env.APP_VERSION_LABEL }}".zip s3://"${{ secrets.AWS_DEPLOY_S3_BUCKET }}"/$GITHUB_SHA.zip
-      - name: Create EB App version
-        run: aws elasticbeanstalk create-application-version --application-name "${{ secrets.AWS_EB_APP_NAME }}" --version-label $GITHUB_SHA --source-bundle S3Bucket="${{ secrets.AWS_DEPLOY_S3_BUCKET }}",S3Key=$GITHUB_SHA.zip --no-auto-create-application
-      - name: Update environment
-        run: aws elasticbeanstalk update-environment --environment-name "${{ secrets.AWS_EB_ENV_NAME }}" --version-label $GITHUB_SHA
+          zip -r ${{ env.APP_VERSION_LABEL }}.zip * .dockerignore
+          aws s3 cp ${{ env.APP_VERSION_LABEL }}.zip s3://${{ secrets.AWS_DEPLOY_S3_BUCKET }}/$GITHUB_SHA.zip
+      # - name: Create EB App version
+      #   run: aws elasticbeanstalk create-application-version --application-name "${{ secrets.AWS_EB_APP_NAME }}" --version-label $GITHUB_SHA --source-bundle S3Bucket="${{ secrets.AWS_DEPLOY_S3_BUCKET }}",S3Key=$GITHUB_SHA.zip --no-auto-create-application
+      # - name: Update environment
+      #   run: aws elasticbeanstalk update-environment --environment-name "${{ secrets.AWS_EB_ENV_NAME }}" --version-label $GITHUB_SHA
